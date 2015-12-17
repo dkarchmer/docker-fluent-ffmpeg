@@ -22,10 +22,11 @@ Source and example: https://github.com/ampervue/docker-fluent-ffmpeg
 
 ~~~~
 docker pull dkarchmervue/fluent-ffmpeg
+docker run --rm -ti -v ${PWD}:/work dkarchmervue/fluent-ffmpeg node your-nodejs-script.js
+# Image can also be used for ffmpeg/python calls:
 docker run --rm -ti dkarchmervue/fluent-ffmpeg ffmpeg -version
 docker run --rm -ti -v ${PWD}:/work dkarchmervue/fluent-ffmpeg ffmpeg video.mp4 ...
 docker run --rm -ti -v ${PWD}:/work dkarchmervue/fluent-ffmpeg python your-python-script.py
-docker run --rm -ti -v ${PWD}:/work dkarchmervue/fluent-ffmpeg node your-nodejs-script.py
 docker run --rm -ti dkarchmervue/fluent-ffmpeg bash
 ~~~~
 
