@@ -1,0 +1,21 @@
+{
+  "name": "docker-fluent-ffmpeg",
+  "version": "0.1.0",
+  "description": "Example of using docker image dkarchmevue/fluent-ffmpeg",
+  "main": "split.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ffmpeg",
+    "video",
+	"docker"
+  ],
+  "author": "David Karchmer",
+  "license": "MIT",
+  "dependencies": {
+    "fluent-ffmpeg": "^2.0.1",
+    "moment": "^2.10.6",
+    "moment-duration-format": "^1.3.0"
+  }
+}
