@@ -45,6 +45,7 @@ docker build -t split .
 
 # Mount current directory on container so that file can be written back to host
 # Assuming videos are on current directory
-docker run --rm -ti -v ${PWD}:/code split node video.mp4 10 30 out.mp4
+cd to/directory/with/videos
+docker run --rm -ti -v ${PWD}:/videos split /videos/c1.mp4 5 10 /videos/out.mp4
 ls out.mp4
 ~~~~

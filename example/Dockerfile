@@ -15,11 +15,12 @@ MAINTAINER David Karchmer <dkarchmer@gmail.com>
 # # Get example files and build new image
 # git clone https://github.com/ampervue/docker-fluent-ffmpeg
 # cd example
-# docker build -t example .
+# docker build -t split .
 #
 # # Mount current directory on container so that file can be written back to host
 # # Assuming videos are on current directory
-# docker run --rm -ti -v ${PWD}:/code example node video.mp4 10 30 out.mp4
+# cd to/directory/with/videos
+# docker run --rm -ti -v ${PWD}:/videos split /videos/c1.mp4 5 10 /videos/out.mp4
 # ls out.mp4
 # ~~~~
 # ============================================================================
@@ -29,13 +30,13 @@ MAINTAINER David Karchmer <dkarchmer@gmail.com>
 
 RUN mkdir /code
 WORKDIR /code
-ADD package.json /code/
+ADD package.json /code/package.json
 RUN npm install
 
 # Step 2: Copy Python script
 # ----------------------------------------
 
-ADD split.js /code/
+ADD split.js /code/split.js
 
 # Step 3: Configure entrypoint
 # ----------------------------------------
