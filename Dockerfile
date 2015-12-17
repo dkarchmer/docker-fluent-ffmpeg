@@ -26,14 +26,6 @@ MAINTAINER David Karchmer <dkarchmer@ampervue.com>
 #
 #####################################################################
 
-ENV NODEJS_VERSION 3.5.1
-ENV NUM_CORES 4
-
-RUN locale-gen en_US.UTF-8  
-ENV LANG en_US.UTF-8  
-ENV LANGUAGE en_US:en  
-ENV LC_ALL en_US.UTF-8 
-
 # Add the following two dependencies for nodejs
 RUN curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
 RUN apt-get update -qq && apt-get install -y --force-yes \
