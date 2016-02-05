@@ -1,4 +1,4 @@
-FROM dkarchmervue/ffmpeg
+FROM ampervue/ffmpeg
 
 # https://github.com/ampervue/docker-fluent-ffmpeg
 # https://hub.docker.com/r/dkarchmervue/fluent-ffmpeg/
@@ -10,10 +10,10 @@ MAINTAINER David Karchmer <dkarchmer@ampervue.com>
 #
 # A Docker image with everything needed to run Moviepy scripts
 # 
-# Image based on dkarchmervue/ffmpeg (Ubuntu 14.04)
+# Image based on ampervue/ffmpeg (Ubuntu 14.04)
 #
 #   with
-#     - Latest Python 3.5
+#     - Latest Python 3.4
 #     - Latest FFMPEG (built)
 #     - NodeJS
 #     - fluent-ffmpeg

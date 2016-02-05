@@ -37,10 +37,10 @@ to split a video
 
 ~~~~
 # Pull image
-docker pull dkarchmervue/moviepy
+docker pull dkarchmervue/fluent-ffmpeg
 
 # Get example files and build new image
-git clone https://github.com/ampervue/docker-ffmpeg-moviepy
+git clone https://github.com/ampervue/docker-fluent-ffmpeg
 cd example
 docker build -t split .
 
