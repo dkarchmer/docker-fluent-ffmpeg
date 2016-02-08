@@ -32,7 +32,6 @@ RUN apt-get update -qq && apt-get install -y --force-yes \
     nodejs; \
     apt-get clean
 
-RUN mkdir /usr/local/src
 WORKDIR /usr/local/src
 
 # Custom Builds go here
