@@ -18,7 +18,7 @@ docker build -t <imageName> .
 
 Docker Hub: https://registry.hub.docker.com/u/dkarchmervue/fluent-ffmpeg/
 
-Source and example: https://github.com/ampervue/docker-fluent-ffmpeg
+Source and example: https://github.com/dkarchmer/docker-fluent-ffmpeg
 
 ~~~~
 docker pull dkarchmervue/fluent-ffmpeg
@@ -40,7 +40,7 @@ to split a video
 docker pull dkarchmervue/fluent-ffmpeg
 
 # Get example files and build new image
-git clone https://github.com/ampervue/docker-fluent-ffmpeg
+git clone https://github.com/dkarchmer/docker-fluent-ffmpeg
 cd example
 docker build -t split .
 
