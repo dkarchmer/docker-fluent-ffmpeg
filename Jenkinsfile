@@ -82,7 +82,9 @@ pipeline {
               script {
                 docker.withRegistry("https://613765377812.dkr.ecr.us-east-1.amazonaws.com", "ecr:us-east-1:storyfile-ecr-aws") {
                   sh("docker build --no-cache -t 613765377812.dkr.ecr.us-east-1.amazonaws.com/${project}:${nextTag} . ")
+                  sh("docker tag 613765377812.dkr.ecr.us-east-1.amazonaws.com/${project}:${nextTag} 613765377812.dkr.ecr.us-east-1.amazonaws.com/${project}:latest ")
                   sh("docker push 613765377812.dkr.ecr.us-east-1.amazonaws.com/${project}:${nextTag}")
+                  sh("docker push 613765377812.dkr.ecr.us-east-1.amazonaws.com/${project}:latest")
                 }
               }
             }
