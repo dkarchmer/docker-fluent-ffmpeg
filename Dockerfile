@@ -27,7 +27,7 @@ MAINTAINER David Karchmer <dkarchmer@ampervue.com>
 #####################################################################
 
 # Add the following two dependencies for nodejs
-RUN curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+RUN curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 RUN apt-get update -qq && apt-get install -y --force-yes \
     nodejs; \
     apt-get clean
