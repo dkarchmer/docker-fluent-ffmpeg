@@ -62,5 +62,5 @@ jobs:
       uses: actions-hub/gcloud@360.0.0
       env:
         PROJECT_ID: "$PROJECT_ID"
-      with: |-
+      with:
         args: deploy releases create "$DEPLOYMENT_NAME" --delivery-pipeline=deploy-pipeline --region="$LOCATION" --images="$IMAGE:$GITHUB_SHA"
