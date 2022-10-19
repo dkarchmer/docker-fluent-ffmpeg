@@ -1,0 +1,66 @@
+
+name: Build and Deploy
+
+on:
+  push:
+    branches: [ "master" ]
+
+env:
+  PROJECT_ID: nats-deploy-fade
+  GAR_LOCATION: us-central1 # TODO: update region of the Artifact Registry
+  LOCATION: us-central1
+  DEPLOYMENT_NAME: gke-test # TODO: update to deployment name
+  REPOSITORY: video-process # TODO: update to Artifact Registry docker repository
+  IMAGE: fluent-ffmpeg
+
+jobs:
+  setup-build-publish-deploy:
+    name: Setup, Build, Publish, and Deploy
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    # Configure Workload Identity Federation and generate an access token.
+    - id: 'auth'
+      name: 'Authenticate to Google Cloud'
+      uses: 'google-github-actions/auth@v0'
+      with:
+        token_format: 'access_token'
+        workload_identity_provider: 'projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
+        service_account: 'my-service-account@my-project.iam.gserviceaccount.com'
+
+    # Alternative option - authentication via credentials json
+    # - id: 'auth'
+    #   uses: 'google-github-actions/auth@v0'
+    #   with:
+    #     credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+    - name: Docker configuration
+      run: |-
+        echo ${{steps.auth.outputs.access_token}} | docker login -u oauth2accesstoken --password-stdin https://$GAR_LOCATION-docker.pkg.dev
+    
+    # Build the Docker image
+    - name: Build
+      run: |-
+        docker build \
+          --tag "$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$GITHUB_SHA" \
+          --build-arg GITHUB_SHA="$GITHUB_SHA" \
+          --build-arg GITHUB_REF="$GITHUB_REF" \
+          ./example/
+    # Push the Docker image to Google Artifact Registry
+    - name: Publish
+      run: |-
+        docker push "$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$GITHUB_SHA"
+    # Deploy
+    - name: Deploy
+      uses: actions-hub/gcloud@360.0.0
+      env:
+        PROJECT_ID: "$PROJECT_ID"
+      with: |-
+        args: deploy releases create "$DEPLOYMENT_NAME" --delivery-pipeline=deploy-pipeline --region="$LOCATION" --images="$IMAGE:$GITHUB_SHA"
