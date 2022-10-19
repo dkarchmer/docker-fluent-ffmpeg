@@ -63,4 +63,4 @@ jobs:
       env:
         PROJECT_ID: "$PROJECT_ID"
       with:
-        args: deploy releases create "$DEPLOYMENT_NAME" --delivery-pipeline=deploy-pipeline --region="$LOCATION" --images="$IMAGE:$GITHUB_SHA"
+        args: deploy releases create "$DEPLOYMENT_NAME" --delivery-pipeline=deploy-pipeline --region="$LOCATION" --images=my-app-image="$IMAGE:$GITHUB_SHA"
